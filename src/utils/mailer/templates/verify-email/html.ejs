@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #root {
+      border-top: 4px solid #d945ef;
+    }
+
+    #main {
+      padding: 10%;
+    }
+
+    #logo {
+      margin-top: 30px;
+    }
+
+    #mail-body {
+      margin-top: 50px;
+    }
+
+    #pleasantry {
+      font-family: Inter;
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: 0em;
+      text-align: left;
+    }
+
+    #pleasantry>span {
+      font-weight: 600;
+    }
+
+    #footer {
+      width: 100%;
+      background-color: #f3f3f3;
+      position: relative;
+      z-index: 1000000;
+      /* position: fixed;
+              bottom: 0;
+              left: 0; */
+    }
+
+    #footer-divider {
+      height: 1px;
+      /* Adjust thickness here */
+      background-color: #d9d9d9;
+      /* Adjust color here */
+      width: 100%;
+      /* You can adjust the width as required */
+      border: none;
+    }
+
+    p {
+      font-family: Inter;
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 20px;
+      letter-spacing: 0em;
+      text-align: left;
+    }
+
+    /* .flex {
+      padding: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    .flex>img:not(:last-of-type) {
+      margin-right: 20px;
+    }
+
+    .flex>img {
+      width: 20px;
+    } */
+
+    .flex {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .flex img {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    #group-wrapper {
+      width: 100%;
+      height: 300px;
+      background-image: url("https://enif-inventory.s3.amazonaws.com/assets/Group+427321650.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+      padding: 10px;
+    }
+
+    #group {
+      padding: 10px 0 10px 0;
+    }
+
+    svg {
+      margin-top: -200px;
+      width: 100%;
+      z-index: 0;
+      margin-bottom: -5%;
+    }
+
+    .setup {
+      margin: 50px 0 50px 0;
+      text-align: center;
+    }
+
+    .setup>a>button {
+      display: inline-block;
+      padding: 10px 20px 10px 20px;
+      border: none;
+      background-color: #121212;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 500;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .thick {
+      font-weight: 900;
+    }
+
+    p>a {
+      color: #121212;
+    }
+  </style>
+</head>
+
+<body>
+  <section id="root">
+    <main id="main">
+      <div id="logo">
+        <img src="https://enif-inventory.s3.amazonaws.com/assets/enif_logo.png" alt="enif-logo" />
+      </div>
+
+      <section id="mail-body">
+        <p id="pleasantry">
+          <span>Dear <%=firstName%></span>,
+        </p>
+        <p>To secure your account and ensure you receive important updates, please take a moment to verify your email:
+        </p>
+        <div class="setup">
+          <a href="<%= link %>" target="_blank"><button>Verify Email</button></a>
+        </div>
+        <p>
+          Got questions or need assistance? Reach out anytime at
+          <a href="mailto:support@enifintelligence.com">support team</a>.
+        </p>
+        <p>Thanks for choosing Enif Intelligence!</p>
+        <p>Best regards,
+          </br>
+          Enif Intelligence Team
+        </p>
+      </section>
+    </main>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path fill="#f3f3f3" fill-opacity="1"
+        d="M0,160L48,144C96,128,192,96,288,96C384,96,480,128,576,165.3C672,203,768,245,864,245.3C960,245,1056,203,1152,181.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+      </path>
+    </svg>
+    <footer id="footer">
+      <!-- <div id="group">
+        <div id="group-wrapper"></div>
+      </div> -->
+      <div id="footer-divider"></div>
+      <div class="flex">
+        <a href="https://twitter.com/enif_ai"><img src="https://enif-inventory.s3.amazonaws.com/assets/twitter.png" alt="twitter" /></a>
+          <a href="https://linkedin.com/company/enif-intelligence/?viewAsMember=true"><img
+          src="https://enif-inventory.s3.amazonaws.com/assets/linkedin.png" alt="linkedin" /></a>
+      </div>
+    </footer>
+  </section>
+</body>
+
+</html>

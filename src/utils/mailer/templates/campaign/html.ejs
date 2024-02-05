@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campaign</title>
+    <style>
+      body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #roott {
+        border-top: 4px solid #d945ef;
+      }
+
+      #main {
+        padding: 10%;
+      }
+
+      #logo {
+        margin-top: 30px;
+      }
+
+      #mail-body {
+        margin-top: 50px;
+      }
+
+      #pleasantry {
+        font-family: Inter;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+
+      #pleasantry > span {
+        font-weight: 600;
+      }
+
+      #footer {
+        width: 100%;
+        background-color: #f3f3f3;
+        position: relative;
+        z-index: 1000000;
+        /* position: fixed;
+        bottom: 0;
+        left: 0; */
+      }
+
+      #footer-divider {
+        height: 1px;
+        /* Adjust thickness here */
+        background-color: #d9d9d9;
+        /* Adjust color here */
+        width: 100%;
+        /* You can adjust the width as required */
+        border: none;
+      }
+
+      p {
+        font-family: Inter;
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+
+      /* .flex {
+      padding: 20px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .flex>img:not(:last-of-type) {
+      margin-right: 20px;
+    }
+
+    .flex>img {
+      width: 20px;
+    } */
+
+      .flex {
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      .flex img {
+        display: inline-block;
+        margin: 0 10px;
+      }
+
+      #group-wrapper {
+        width: 100%;
+        height: 300px;
+        background-image: url("https://enif-inventory.s3.amazonaws.com/assets/Group+427321650.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        padding: 10px;
+      }
+
+      #group {
+        padding: 10px 0 10px 0;
+      }
+
+      svg {
+        margin-top: -200px;
+        width: 100%;
+        z-index: 0;
+        margin-bottom: -5%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section id="root">
+      <main id="main">
+        <section id="mail-body">
+          <!-- <p id="pleasantry"><span>Hello</span>,</p> -->
+          <!-- <p>Title: <%=title%></p> -->
+          <!-- <p>Product: <%=productName%></p> -->
+          <p><%=message%></p>
+          <p>Best regards.</p>
+          <!-- <p>Best regards,</p>
+          <p>Enif Intelligence Team</p> -->
+        </section>
+      </main>
+    </section>
+  </body>
+</html>
