@@ -1,6 +1,6 @@
 const { User, Token } = require("../user/user.model");
 const Transaction = require("../user/transaction.model");
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const { validationResult } = require("express-validator");
 const Mailer = require("../utils/mailer/mailer");
@@ -26,11 +26,10 @@ const login = async (req, res, next) => {
         .status(400)
         .json({ message: "Invalid Email or Password", data: null });
 
-    // const validPassword = await bcrypt.compare(
-    //   req.body.password,
-    //   user.password
-    // );
-    const validPassword = true;
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
 
     if (!validPassword)
       return res
@@ -109,9 +108,8 @@ const signup = async (req, res, next) => {
       user.isActivated = true;
     }
 
-    // const salt = await bcrypt.genSalt(10);
-    // user.password = await bcrypt.hash(user.password, salt);
-    user.password = password;
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
 
     let token = new Token({
       userId: user._id,
@@ -165,9 +163,8 @@ const changePassword = async (req, res, next) => {
     if (!passwordMatch) {
       return res.status(401).json({ error: "Invalid old password" });
     }
-    // const salt = await bcrypt.genSalt(10);
-    // const hashedPassword = await bcrypt.hash(newPassword, salt);
-    const hashedPassword = "";
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
 
     user.password = hashedPassword;
 
@@ -259,9 +256,8 @@ const passwordReset = async (req, res, next) => {
       return res.status(400).json({ message: "Invalid token.", data: user });
     }
 
-    // const salt = await bcrypt.genSalt(10);
-    // user.password = await bcrypt.hash(newPassword, salt);
-    user.password = "";
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
 
     await user.save();
 
