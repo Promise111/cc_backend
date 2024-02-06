@@ -296,9 +296,7 @@ const updateUserInfo = async (req, res, next) => {
       ethAddress,
       cashApp,
       payPalEmail,
-      isActivated,
     } = req.body;
-    console.log("body", req.body);
     let { userId } = req.params;
     const user = User.findById(userId);
     if (!user) {
@@ -363,10 +361,6 @@ const updateUserInfo = async (req, res, next) => {
     }
     if (payPalEmail && payPalEmail != "") {
       user.payPalEmail = payPalEmail;
-    }
-    if (isActivated) {
-      console.log(isActivated);
-      user.isActivated = true;
     }
     await user.save();
     return res.status.json({ message: "Wallet updated successfully", data });

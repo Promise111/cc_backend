@@ -271,12 +271,22 @@ const updateUserInfo = async (req, res, next) => {
       ethAddress,
       cashApp,
       payPalEmail,
+      isActivated,
+      isVerified,
     } = req.body;
     let { userId } = req.params;
+    console.log(req.body, typeof isActivated);
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found", data: user });
     }
+    if (isActivated != null) {
+      console.log("got here");
+      user.isActivated = !user.isActivated;
+    }
+    // if (isVerified && typeof isActivated == "boolean") {
+    //   user.isVerified = isVerified;
+    // }
     if (totalWon && totalWon != "") {
       user.totalWon = parseInt(totalWon);
     }
