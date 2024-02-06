@@ -1,6 +1,7 @@
 const { User, Token } = require("../user/user.model");
 const Transaction = require("../user/transaction.model");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
+const argon2 = require("argon2");
 const crypto = require("crypto");
 const { validationResult } = require("express-validator");
 const Mailer = require("../utils/mailer/mailer");
@@ -26,10 +27,11 @@ const login = async (req, res, next) => {
         .status(400)
         .json({ message: "Invalid Email or Password", data: null });
 
-    const validPassword = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
+    // const validPassword = await bcrypt.compare(
+    //   req.body.password,
+    //   user.password
+    // );
+    const validPassword = await argon2.verify(user.password, req.body.password);
 
     if (!validPassword)
       return res
@@ -108,8 +110,10 @@ const signup = async (req, res, next) => {
       user.isActivated = true;
     }
 
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
+    // const salt = await bcrypt.genSalt(10);
+    // user.password = await bcrypt.hash(user.password, salt);
+
+    user.password = await argon2.hash(user.password);
 
     let token = new Token({
       userId: user._id,
@@ -158,13 +162,16 @@ const changePassword = async (req, res, next) => {
     }
 
     // Check if the old password matches the stored password
-    const passwordMatch = await bcrypt.compare(oldPassword, user.password);
+    // const passwordMatch = await bcrypt.compare(oldPassword, user.password);
+    const passwordMatch = await argon2.verify(user.password, oldPassword);
 
     if (!passwordMatch) {
       return res.status(401).json({ error: "Invalid old password" });
     }
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    const hashedPassword = await argon2.hash(newPassword);
 
     user.password = hashedPassword;
 
@@ -256,8 +263,9 @@ const passwordReset = async (req, res, next) => {
       return res.status(400).json({ message: "Invalid token.", data: user });
     }
 
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(newPassword, salt);
+    // const salt = await bcrypt.genSalt(10);
+    // user.password = await bcrypt.hash(newPassword, salt);
+    user.password = await argon2.hash(newPassword);
 
     await user.save();
 
