@@ -121,7 +121,7 @@ const userSchema = new Schema(
       default: "",
       required: false,
     },
-    isActivated: { type: Boolean, default: false },
+    isActivated: { type: Boolean, default: true },
     package: {
       type: Object,
     },
